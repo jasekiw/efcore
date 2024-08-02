@@ -1018,18 +1018,10 @@ public class CSharpSnapshotGenerator : ICSharpSnapshotGenerator
             {
                 annotations.Remove(isExcludedAnnotation.Name);
             }
-
-            if (schema != null
-                || (schemaAnnotation != null && tableName != null))
+            // only add the schema clause if the schema value is actually set
+            if (schema != null && tableName != null)
             {
-                stringBuilder
-                    .Append(", ");
-
-                if (schema == null && !requiresTableBuilder)
-                {
-                    stringBuilder.Append("(string)");
-                }
-
+                stringBuilder.Append(", ");
                 stringBuilder.Append(Code.Literal(schema));
             }
         }
